@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const profile_schema_1 = require("../schemas/profile.schema");
 class HealthController {
     health(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -21,5 +22,28 @@ class HealthController {
         });
     }
     ;
+    profile(request, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            response.send('Start up' + request.params.id);
+        });
+    }
+    ;
 }
 exports.HealthController = HealthController;
+class Profile {
+    addProfile(request, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const postData = request.body;
+            const createdProfile = new profile_schema_1.User({
+                name: postData.name,
+                age: postData.age,
+                mobile: postData.mobile,
+                company: postData.company,
+            });
+            const user = yield createdProfile.save();
+            response.status(201).json(user);
+        });
+    }
+    ;
+}
+exports.Profile = Profile;
