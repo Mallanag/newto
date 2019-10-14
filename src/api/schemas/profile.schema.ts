@@ -8,4 +8,4 @@ const addProfile =new Schema(
 }
 ); 
 export const User = mongoose.model('user',addProfile) 
-//comment
+
